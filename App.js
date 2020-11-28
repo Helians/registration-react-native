@@ -1,21 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import Register from './components/Register';
+import Successful from './components/Successful';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={Register}
+            options={{
+              title: 'Mroads Registeration',
+              headerStyle: styles.navigationHeader,
+              headerTitleStyle: styles.navigationHeaderText,
+            }}
+          />
+          <Stack.Screen
+            name="success"
+            component={Successful}
+            options={{
+              title: 'Success',
+              headerStyle: styles.navigationHeader,
+              headerTitleStyle: styles.navigationHeaderText,
+              headerTintColor: '#111'
+            }}
+          />
+        </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  navigationHeader: {
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  navigationHeaderText: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#222',
   },
 });
+
+export default App;
